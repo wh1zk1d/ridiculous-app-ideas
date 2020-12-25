@@ -1,16 +1,25 @@
 import { useState } from 'react'
-import useData from './useData'
+import useData from './hooks/useData'
+import waait from './utils/waait'
 import styled from 'styled-components'
 
 const Card = styled.div`
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 0px 2.2px rgba(0, 0, 0, 0.011), 0 0px 5.3px rgba(0, 0, 0, 0.016), 0 0px 10px rgba(0, 0, 0, 0.02),
-    0 0px 17.9px rgba(0, 0, 0, 0.024), 0 0px 33.4px rgba(0, 0, 0, 0.029), 0 0px 80px rgba(0, 0, 0, 0.04);
-  padding: 3rem;
+  background: var(--primary);
+  box-shadow: -12px 12px 0px var(--secondary);
+  color: #fff;
+  padding: 8rem;
   text-align: center;
-  max-width: 42em;
-  width: 60vw;
+  max-width: 44em;
+  width: 90vw;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: -8px 8px 0px var(--secondary);
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 70vw;
+  }
 `
 
 const App = () => {
@@ -22,24 +31,43 @@ const App = () => {
     return arr[i]
   }
 
-  const createIdea = () => {
+  const createIdea = async () => {
     const topic = getRandomEntry(topics)
     const type = getRandomEntry(types)
     const tech = getRandomEntry(techs)
 
-    const idea = `Build a ${type} like app about ${topic} and use "${tech}" for it`
-    setIdea(idea)
+    idea ? setIdea('Generating another ridiculous idea...') : setIdea('Generating a ridiculous idea...')
+
+    await waait(2)
+
+    const ridiculousIdea = `Build a ${type} like app about ${topic} and use "${tech}" for it ⚡️`
+    setIdea(ridiculousIdea)
   }
 
   return (
     <div className='app'>
       <Card>
-        <h1>Ridiculous App Ideas 🤪</h1>
+        <h1>
+          Ridiculous App Ideas<sup>&trade;</sup>
+        </h1>
 
-        {idea && <h2>{idea}</h2>}
+        {idea ? <h2>{idea}</h2> : <h2>[The next big thing 💸]</h2>}
 
-        <button onClick={createIdea}>{!idea ? 'Create an idea!' : 'Create another one!'}</button>
+        <button onClick={createIdea}>{!idea ? '👉🏼 Create an idea! 👈🏼' : 'Create another one!'}</button>
       </Card>
+      <div className='copyright'>
+        Made by{' '}
+        <a
+          href='https://github.com/wh1zk1d/ridiculous-app-ideas'
+          title='Check me out on GitHub'
+          target='_blank'
+          rel='noopener noreferrer'>
+          wh1zk1d
+        </a>
+        , who's kinda ridiculous himself.
+        <br />
+        Feel free to add your own funky ideas!
+      </div>
     </div>
   )
 }
