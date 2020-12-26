@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import 'typeface-inconsolata'
+import 'typeface-ibm-plex-mono'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
