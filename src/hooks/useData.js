@@ -10,8 +10,8 @@ const useData = () => {
     'Plants',
     'Coffee',
   ])
-  const [types] = useState(['Tinder', 'To-Do', 'Wiki', 'Instagram', 'Netflix'])
-  const [techs] = useState(['useState', 'API fetching', 'React Router', 'Hooks', 'Context'])
+  const [types] = useState(['Tinder', 'To-Do', 'Wiki', 'Instagram', 'Netflix', 'Interactive', 'Shop'])
+  const [techs] = useState(['useState', 'API fetching', 'React Router', 'a custom hook', 'Context', 'Zustand'])
 
   return { topics, types, techs }
 }
